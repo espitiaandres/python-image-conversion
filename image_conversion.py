@@ -9,8 +9,6 @@ import helpers
 
 logger = logging.getLogger(__name__)
 
-# TODO: abstract this out into separate functions
-# TODO: clean up duplicate/undry code
 # TODO: add cli args?
 # TODO: optimize with parallelism
 
@@ -29,7 +27,6 @@ def main():
     if not os.path.exists(constants.OUTPUT_PATH):
         os.mkdir(os.path.join(constants.OUTPUT_PATH))
 
-    # TODO: separate this for loop in its own function
     for count, file_name in enumerate(files):
         if f".{constants.FILE_TYPE_OUTPUT}" in file_name.lower():
             # If the file is already the desired output_type, just move the file
