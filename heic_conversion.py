@@ -12,20 +12,36 @@ logger = logging.getLogger(__name__)
 # TODO: add cli args?
 # TODO: optimize
 
+INPUT_PATH = "./input"
+OUTPUT_PATH = "./output"
 FILE_TYPES_INPUT = (".heic", ".png")
-FILE_TYPE_OUTPUT = ".jpg"
+FILE_TYPE_OUTPUT = "jpg"
+
+
+@penguin(foreground="blue")
+def image_conversion(file_name):
+    source_file = f"{INPUT_PATH}/{file_name}"
+    img = Image(filename=source_file)
+    img.format = FILE_TYPE_OUTPUT
+
+    if ".HEIC" in file_name:
+        new_file_name = re.compile(re.escape(".heic"), re.IGNORECASE).sub(f".{FILE_TYPE_OUTPUT}", file_name)
+    elif ".PNG" in file_name:
+        new_file_name = re.compile(re.escape(".png"), re.IGNORECASE).sub(f".{FILE_TYPE_OUTPUT}", file_name)
+    
+    full_new_file_name = os.path.join(OUTPUT_PATH, new_file_name)
+    img.save(filename=full_new_file_name)
+    img.close()
+    return
 
 
 @penguin(verbose=True, foreground="green")
 def main():
-    input_path = "./input"
-    output_path = "./output"
-
     # TODO: clean this up
     files = [
         f
-        for f in os.listdir(input_path)
-        if isfile(join(input_path, f))
+        for f in os.listdir(INPUT_PATH)
+        if isfile(join(INPUT_PATH, f))
         and f != __file__
         and str(f).lower().endswith(FILE_TYPES_INPUT)
     ]
@@ -33,27 +49,26 @@ def main():
     num_files = len(files)
     logger.info(f"# of files: {str(num_files)}")
 
-    os.mkdir(os.path.join(output_path))
+    if not os.path.exists(OUTPUT_PATH):
+        os.mkdir(os.path.join(OUTPUT_PATH))
 
     # TODO: separate this for loop in its own function
     for count, file_name in enumerate(files):
-        source_file = f"{input_path}/{file_name}"
-        img = Image(filename=source_file)
-        img.format = "jpg"
-
-        if ".HEIC" in file_name:
-            # new_file_name = os.path.join(output_path, file_name.replace(".HEIC", ".JPG"))
-            new_file_name = re.compile(re.escape(".heic"), re.IGNORECASE).sub(".jpg", file_name)
-            # full_new_file_name = os.path.join(output_path, new_file_name)
-        elif ".PNG" in file_name:
-            # new_file_name = os.path.join(output_path, file_name.replace(".PNG", ".JPG"))
-            new_file_name = re.compile(re.escape(".png"), re.IGNORECASE).sub(".jpg", file_name)
-        
-        full_new_file_name = os.path.join(output_path, new_file_name)
-        img.save(filename=full_new_file_name)
-        img.close()
-        # TODO: use logger instead of print statements
+        image_conversion(file_name)
         logger.info(f"Saved: {file_name}. {str((count) * 100 / num_files)}%")
+        # source_file = f"{input_path}/{file_name}"
+        # img = Image(filename=source_file)
+        # img.format = FILE_TYPE_OUTPUT
+
+        # if ".HEIC" in file_name:
+        #     new_file_name = re.compile(re.escape(".heic"), re.IGNORECASE).sub(f".{FILE_TYPE_OUTPUT}", file_name)
+        # elif ".PNG" in file_name:
+        #     new_file_name = re.compile(re.escape(".png"), re.IGNORECASE).sub(f".{FILE_TYPE_OUTPUT}", file_name)
+        
+        # full_new_file_name = os.path.join(output_path, new_file_name)
+        # img.save(filename=full_new_file_name)
+        # img.close()
+        # logger.info(f"Saved: {file_name}. {str((count) * 100 / num_files)}%")
 
 
 if __name__ == "__main__":
