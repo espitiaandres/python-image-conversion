@@ -15,10 +15,13 @@ logger = logging.getLogger(__name__)
 # TODO: optimize with parallelism
 
 
-
 @penguin(verbose=True, foreground="green")
 def main():
-    files = [f for f in os.listdir(constants.INPUT_PATH) if isfile(join(constants.INPUT_PATH, f))]
+    files = [
+        f
+        for f in os.listdir(constants.INPUT_PATH)
+        if isfile(join(constants.INPUT_PATH, f))
+    ]
 
     num_files = len(files)
     logger.info(f"# of files: {str(num_files)}")
@@ -33,7 +36,7 @@ def main():
             helpers.image_copy(file_name)
         else:
             # If the file is **not** already the desired output_type, convert the file
-            helpers.image_conversion(file_name)
+            helpers.image_convert_to_target(file_name)
 
         percent_progress = "{0:.2f}".format((count + 1) * 100 / num_files)
         logger.info(f"Saved: {file_name}. Progress at: {percent_progress}%")
