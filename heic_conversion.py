@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 # TODO: make this extensible for PNG/HEIC to JPG
 # TODO: clean up duplicate/undry code
 # TODO: add cli args?
-# TODO: optimize
+# TODO: optimize with parallelism
 
 INPUT_PATH = "./input"
 OUTPUT_PATH = "./output"
@@ -43,7 +43,7 @@ def main():
         for f in os.listdir(INPUT_PATH)
         if isfile(join(INPUT_PATH, f))
         and f != __file__
-        and str(f).lower().endswith(FILE_TYPES_INPUT)
+        and f.lower().endswith(FILE_TYPES_INPUT)
     ]
 
     num_files = len(files)
@@ -55,20 +55,8 @@ def main():
     # TODO: separate this for loop in its own function
     for count, file_name in enumerate(files):
         image_conversion(file_name)
-        logger.info(f"Saved: {file_name}. {str((count) * 100 / num_files)}%")
-        # source_file = f"{input_path}/{file_name}"
-        # img = Image(filename=source_file)
-        # img.format = FILE_TYPE_OUTPUT
-
-        # if ".HEIC" in file_name:
-        #     new_file_name = re.compile(re.escape(".heic"), re.IGNORECASE).sub(f".{FILE_TYPE_OUTPUT}", file_name)
-        # elif ".PNG" in file_name:
-        #     new_file_name = re.compile(re.escape(".png"), re.IGNORECASE).sub(f".{FILE_TYPE_OUTPUT}", file_name)
-        
-        # full_new_file_name = os.path.join(output_path, new_file_name)
-        # img.save(filename=full_new_file_name)
-        # img.close()
-        # logger.info(f"Saved: {file_name}. {str((count) * 100 / num_files)}%")
+        percent_progress = '{0:.2f}'.format((count + 1) * 100 / num_files)
+        logger.info(f"Saved: {file_name}. Progress at: {percent_progress}%")
 
 
 if __name__ == "__main__":
