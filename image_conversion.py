@@ -11,7 +11,6 @@ from multiprocessing import Pool, cpu_count
 logger = logging.getLogger(__name__)
 
 # TODO: add cli args?
-# TODO: optimize with parallelism
 
 
 @penguin(verbose=True, foreground="green")
