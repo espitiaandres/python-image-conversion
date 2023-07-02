@@ -10,15 +10,15 @@ Convert all images in a specified directory to a specified file type.
 
 ## Installation
 
-1. In your terminal, create a virtual environment (venv) through the following command, replacing the venv's name:
-   `python3 -m venv <NAME_OF_YOUR_VIRTUAL_ENVIRONMENT_HERE>`
-2. Activate your virtual environment with the following command:
-   `source <NAME_OF_YOUR_VIRTUAL_ENVIRONMENT_HERE>/bin/activate`
-3. Once your venv is activated, install all the necessary pip packages detailed in `requirements.txt`. You can do this by using this command:
-   `pip install -r requirements.txt`
-4. Once this command succeeds, specify the necessary parameters in `./constants/constants.py` as detailed above.
-5. Run the command below. This will start your image conversion!
-   `python image_conversion.py`
+- In your terminal, create a virtual environment (venv) through the following command, replacing the venv's name:
+  - `python3 -m venv <NAME_OF_YOUR_VIRTUAL_ENVIRONMENT_HERE>`
+- Activate your virtual environment with the following command:
+  - `source <NAME_OF_YOUR_VIRTUAL_ENVIRONMENT_HERE>/bin/activate`
+- Once your venv is activated, install all the necessary pip packages detailed in `requirements.txt`. You can do this by using this command:
+  - `pip install -r requirements.txt`
+- Once this command succeeds, specify the necessary parameters in `./constants/constants.py` as detailed above.
+- Run the command below. This will start your image conversion!
+  - `python image_conversion.py`
 
 ## Notes
 
