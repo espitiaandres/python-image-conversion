@@ -30,7 +30,7 @@ def main():
     files_without_desired_output_type = []
 
     for file_name in files:
-        if f".{constants.FILE_TYPE_OUTPUT}" in file_name.lower():
+        if f".{constants.OUTPUT_FILE_TYPE}" in file_name.lower():
             files_with_desired_output_type.append(file_name)
         else:
             files_without_desired_output_type.append(file_name)
@@ -38,11 +38,6 @@ def main():
     with Pool(cpu_count()) as p:
         p.map(helpers.image_copy, files_with_desired_output_type)
         p.map(helpers.image_convert_to_target, files_without_desired_output_type)
-
-
-
-
-
 
     return
 

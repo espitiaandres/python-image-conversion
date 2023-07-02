@@ -12,12 +12,12 @@ def image_convert_to_target(file_name: str):
 
     img = Image(filename=source_file)
 
-    img.format = constants.FILE_TYPE_OUTPUT
+    img.format = constants.OUTPUT_FILE_TYPE
 
     file_extension = file_name.split(".")[1]
 
     new_file_name = re.compile(re.escape(file_extension), re.IGNORECASE).sub(
-        f".{constants.FILE_TYPE_OUTPUT}", file_name
+        f".{constants.OUTPUT_FILE_TYPE}", file_name
     )
 
     full_new_file_name = os.path.join(constants.OUTPUT_PATH, new_file_name)

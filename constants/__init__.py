@@ -1,1 +1,1 @@
-from .constants import FILE_TYPE_OUTPUT, INPUT_PATH, OUTPUT_PATH
+from .constants import OUTPUT_FILE_TYPE, INPUT_PATH, OUTPUT_PATH
