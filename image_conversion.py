@@ -14,10 +14,13 @@ logger = logging.getLogger(__name__)
 
 @penguin(verbose=True, foreground="green")
 def main():
+    valid_image_extensions = [".jpg", ".png", ".heic", ".tif", ".eps"]
+
     files = [
         f
         for f in os.listdir(constants.INPUT_PATH)
         if isfile(join(constants.INPUT_PATH, f))
+        and os.path.splitext(f)[1].lower() in valid_image_extensions
     ]
 
     num_files = len(files)
