@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 @penguin(verbose=True, foreground="green")
 def main():
-    valid_image_extensions = [".jpg", ".png", ".heic", ".tif", ".eps"]
+    valid_image_extensions = [".jpg", ".png", ".heic", ".tiff", ".eps", ".bmp"]
 
     files = [
         f
