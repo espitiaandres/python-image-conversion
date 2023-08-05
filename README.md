@@ -22,6 +22,6 @@ Convert all images in a specified directory to a specified file type (.png | .jp
 
 ## Notes
 
-- This script uses python's multithreading library as a workaround to the GIL. This helps with scalability, given a case where you have hundreds of images (or more) that you want to convert from one file type to another.
+- This script uses python's multiprocessing library as a workaround to the GIL. This helps with scalability, given a case where you have hundreds of images (or more) that you want to convert from one file type to another. This gives a noticeable performance boost :)
 - If you have any suggestions on how to make this script better, please add an issue here:
   - https://github.com/espitiaandres/python-image-conversion/issues
